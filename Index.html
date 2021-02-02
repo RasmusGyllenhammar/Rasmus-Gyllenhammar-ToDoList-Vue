@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue ToDo List</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+    <style>
+        body {
+            background-color: rgba(52, 199, 59, 0.658);
+        }
+
+      
+        
+    </style>
+
+
+</head>
+
+<body>
+
+
+
+    <div id="list">
+
+       <div class="container">
+           
+          <h1>Todo List</h1>
+        <div v-if="isEditing">
+
+                        <!--V-model är en 2-way binding som "todo"-->
+          <input type="text" v-model="todo">
+          <input type="submit" value="lägg till" @click ="storeTodo">
+
+        </div>
+
+        <div v-else>
+
+            <input type="text" v-model="todo">
+            <input type="submit" value="uppdatera" @click ="updateTodo">
+
+        </div>
+
+
+
+          <ol>
+              <li v-for="(todo, index) in todos"> <!-- lägg till index via loopen i v-for-->
+                  {{ todo}}
+
+                  <button @click="editTodo(index, todo)"> ändra  </button>
+                  <button @click="deleteTodo(index)"> delete</button>
+              </li>
+          </ol>
+
+       </div>
+
+    </div>
+
+    
+
+        <script src="https://unpkg.com/vue">    </script>
+
+        <script>
+          new Vue({
+              el: '#list',
+              data: {
+                  isEditing: false,
+                  selectedIndex: null,
+                  todo: '',
+                  todos: ['GP tp Market', 'Buy new sdadd']
+              },
+
+
+              methods: {
+                  storeTodo() {
+                      this.todos.push(this.todo)  //när mågon klickar på knappen efter att lagt till information/data i inputen fältet och sedan ta den ifnoramtion och lägga till den i todo:s listan
+                      this.todo = '' //tömmer input fältet så det blir tomt igen när man ska skriva. 
+                  }
+              },
+
+              editTodo(index, todo) { //sätter input fältet till den punkten man vill ändra på. 
+                  this.todo = todo
+                  this.selectedIndex = index
+                  this.isEditing = true
+              },
+
+              updateTodo() { //splice byter content på elementen i array
+                    this.todos.splice(this.selectedIndex, 1, this.todo)
+              }
+          })
+        
+        
+
+        </script>
+
+
+
+
+</body>
+
+</html>
