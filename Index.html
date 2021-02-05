@@ -11,10 +11,18 @@
 
     <style>
         body {
-            background-color: rgba(52, 199, 59, 0.658);
+            background: linear-gradient(45deg, #6ac1c5, #bda5ff);
         }
-
-      
+        #list{
+            background: linear-gradient(#e66465, #9198e5);
+            width: 50%;
+            height: 500px;
+            padding: 12px;
+            
+        }
+        li{
+            padding: 10px;
+        }
         
     </style>
 
@@ -23,25 +31,26 @@
 
 <body>
 
-
+  
 
     <div id="list">
 
        <div class="container">
            
           <h1>Todo List</h1>
-        <div v-if="isEditing">
+        <div v-if="!isEditing">
 
                         <!--V-model är en 2-way binding som "todo"-->
           <input type="text" v-model="todo">
           <input type="submit" value="lägg till" @click ="storeTodo">
+          <input type="submit" value="rensa allt" @click = "clearTodo">
 
         </div>
 
         <div v-else>
 
             <input type="text" v-model="todo">
-            <input type="submit" value="uppdatera" @click ="updateTodo">
+            <input type="submit" value="updatera" @click ="updateTodo" >
 
         </div>
 
@@ -71,7 +80,7 @@
                   isEditing: false,
                   selectedIndex: null,
                   todo: '',
-                  todos: ['GP tp Market', 'Buy new sdadd']
+                  todos: ['GP tp Market', 'Buy new sladd']
               },
 
 
@@ -79,18 +88,31 @@
                   storeTodo() {
                       this.todos.push(this.todo)  //när mågon klickar på knappen efter att lagt till information/data i inputen fältet och sedan ta den ifnoramtion och lägga till den i todo:s listan
                       this.todo = '' //tömmer input fältet så det blir tomt igen när man ska skriva. 
-                  }
-              },
-
-              editTodo(index, todo) { //sätter input fältet till den punkten man vill ändra på. 
+                  },
+                  editTodo(index, todo) { //sätter input fältet till den punkten man vill ändra på. 
                   this.todo = todo
                   this.selectedIndex = index
                   this.isEditing = true
               },
 
-              updateTodo() { //splice byter content på elementen i array
-                    this.todos.splice(this.selectedIndex, 1, this.todo)
+              updateTodo() { //splice byter content på elementen i array,
+                    this.todos.splice(this.selectedIndex, 1, this.todo)//kollar på vilken item användaren har klickat på "edit" knappen, då försvinner ett item och ett nytt kommer
+                    this.isEditing = false    //det nya item är this.todo vilket användaren ändrar på
+                                   
+              },
+               deleteTodo(index) {
+                   this.todos.splice(index, 1,)
+               } ,
+               clearTodo() { // this.todos = ''   detta rensar allt
+                   this.todos = ''
+               },
+
+
+
+
               }
+
+                                                                       
           })
         
         
