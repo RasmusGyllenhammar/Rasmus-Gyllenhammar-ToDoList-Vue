@@ -43,7 +43,7 @@
                         <!--V-model är en 2-way binding som "todo"-->
           <input type="text" v-model="todo">
           <input type="submit" value="lägg till" @click ="storeTodo">
-          <input type="submit" value="rensa allt" @click = "clearTodo">
+          <input type="submit" value="rensa allt" @click ="clearTodo">
 
         </div>
 
@@ -62,6 +62,8 @@
 
                   <button @click="editTodo(index, todo)"> ändra  </button>
                   <button @click="deleteTodo(index)"> delete</button>
+                  <input type="checkbox" name="klar">
+                  <label for="klar"> <i>klar</i></label>
               </li>
           </ol>
 
