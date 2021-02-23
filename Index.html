@@ -38,7 +38,7 @@
        <div class="container">
            
           <h1>Todo List</h1>
-        <div v-if="!isEditing">
+        <div v-if="!isEditing"> 
 
                         <!--V-model är en 2-way binding som "todo"-->
           <input type="text" v-model="todo">
@@ -82,7 +82,7 @@
                   isEditing: false,
                   selectedIndex: null,
                   todo: '',
-                  todos: ['GP tp Market', 'Buy new sladd']
+                  todos: []
               },
 
 
@@ -105,8 +105,17 @@
                deleteTodo(index) {
                    this.todos.splice(index, 1,)
                } ,
+                 /*
+                 clearTodo Verkar inte fungera efter när man klickat den och när den rensar allt, man kan inte lägga till nya saker efter rensningen.
+                  Trodde först det var något med strängen men efter att ha skrivit samma kod som i storeTodo-metoden så fungerar den inte fortfarande 
+                  så det är något helt fel med metoden.  den är pajj
+
+                */
                clearTodo() { // this.todos = ''   detta rensar allt
+               
                    this.todos = ''
+                   
+                   
                },
 
 
